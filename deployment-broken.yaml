@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todolist
+spec:
+  selector:
+    matchLabels:
+      app: todolist
+  template:
+    metadata:
+      labels:
+        app: todolist
+    spec:
+      containers:
+      - name: todolist-app
+        image: harbor.vcdn.com.vn/studyk8s/todolist-app:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: config 
+          mountPath: /usr/share/nginx/html
+        ports:
+        - containerPort: 80
